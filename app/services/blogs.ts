@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 const blogs: Blog[] = [
   {
     id: 0,
@@ -40,4 +42,19 @@ export const getBlogs = () => {
 
 export const addBlog = (blog: BlogInput) => {
   return blogs.push({ ...blog, id: nextId, likes: 0 });
+};
+
+export const findBlogById = (id: number) => {
+  const blog = blogs.find((b) => b.id === id);
+  if (!blog) {
+    notFound();
+  }
+  return blog;
+};
+
+export const addLike = (id: number) => {
+  const blog = findBlogById(id);
+  if (blog) {
+    blog.likes++;
+  }
 };
