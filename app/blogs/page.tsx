@@ -1,11 +1,24 @@
 import Link from "next/link";
-import { getBlogs } from "../services/blogs";
+import { getBlogs, filterBlogs } from "../services/blogs";
+import { searchBlogs } from "../actions/blogs";
 
-const Blogs = () => {
-  const blogs = getBlogs();
+const Blogs = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ filter: string }>;
+}) => {
+  const allBlogs = getBlogs();
+  const { filter } = await searchParams;
+  const filteredBlogs = filterBlogs(String(filter));
+  const blogs = filter ? filteredBlogs : allBlogs;
+
   return (
     <div>
       <h2>Blogs</h2>
+      <form action={searchBlogs}>
+        <input placeholder="Search" name="filter" defaultValue={filter || ""} />
+        <button type="submit">Submit</button>
+      </form>
       <ul>
         {blogs
           .sort((a, b) => b.likes - a.likes)

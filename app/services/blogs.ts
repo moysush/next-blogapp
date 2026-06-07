@@ -58,3 +58,8 @@ export const addLike = (id: number) => {
     blog.likes++;
   }
 };
+
+export const filterBlogs = (filterText: string) => {
+  const filteredBlogs = blogs.filter((b) => b.title.toLowerCase().includes(filterText.toLowerCase()));
+  return filteredBlogs;
+};
