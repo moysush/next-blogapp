@@ -5,15 +5,15 @@ const NewBlog = () => {
     <div>
       <form action={createBlog}>
         <div>
-          <input type="text" name="title" placeholder="title" />
+          <input type="text" name="title" placeholder="title"  className="inp"/>
         </div>
         <div>
-          <input type="text" name="author" placeholder="author" />
+          <input type="text" name="author" placeholder="author"  className="inp"/>
         </div>
         <div>
-          <input type="text" name="url" placeholder="url" />
+          <input type="text" name="url" placeholder="url"  className="inp"/>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className="btn">Submit</button>
       </form>
     </div>
   );

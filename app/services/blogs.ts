@@ -1,65 +1,42 @@
+import { Blog } from "@/types";
 import { notFound } from "next/navigation";
-
-const blogs: Blog[] = [
-  {
-    id: 0,
-    title: "React Components: A Deep Dive into Lifecycle and Hooks",
-    author: "Dan Abramov",
-    url: "https://overreacted.io/react-components-deep-dive/",
-    likes: 42,
-  },
-  {
-    id: 1,
-    title: "Understanding the Node.js Event Loop",
-    author: "Bert Belder",
-    url: "https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/",
-    likes: 128,
-  },
-  {
-    id: 2,
-    title: "Designing Resilient Relational Database Schemas",
-    author: "Martin Kleppmann",
-    url: "https://martin.kleppmann.com/2026/05/resilient-schemas/",
-    likes: 85,
-  },
-];
-
-export type Blog = {
-  id: number;
-  title: string;
-  author: string;
-  url: string;
-  likes: number;
-};
+import { db } from "../db";
+import { blogs } from "../db/schema";
+import { eq, ilike } from "drizzle-orm";
 
 export type BlogInput = Omit<Blog, "id" | "likes">;
 
-const nextId = 3;
-
-export const getBlogs = () => {
-  return blogs;
+export const getBlogs = async () => {
+  return await db.query.blogs.findMany();
 };
 
-export const addBlog = (blog: BlogInput) => {
-  return blogs.push({ ...blog, id: nextId, likes: 0 });
+export const addBlog = async (blog: BlogInput) => {
+  return await db.insert(blogs).values({ ...blog, likes: 0 });
 };
 
-export const findBlogById = (id: number) => {
-  const blog = blogs.find((b) => b.id === id);
+export const findBlogById = async (id: number) => {
+  const blog = await db.query.blogs.findFirst({
+    where: eq(blogs.id, id),
+  });
   if (!blog) {
     notFound();
   }
   return blog;
 };
 
-export const addLike = (id: number) => {
-  const blog = findBlogById(id);
+export const addLike = async (id: number) => {
+  const blog = await findBlogById(id);
   if (blog) {
-    blog.likes++;
+    await db
+      .update(blogs)
+      .set({ likes: blog.likes + 1 })
+      .where(eq(blogs.id, id));
   }
 };
 
-export const filterBlogs = (filterText: string) => {
-  const filteredBlogs = blogs.filter((b) => b.title.toLowerCase().includes(filterText.toLowerCase()));
+export const filterBlogs = async (filterText: string) => {
+  const filteredBlogs = await db.query.blogs.findMany({
+    where: ilike(blogs.title, `%${filterText}%`),
+  });
   return filteredBlogs;
 };

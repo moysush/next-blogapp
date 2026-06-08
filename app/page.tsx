@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>Welcome to the Blogapp!</div>;
+  return <div className="text-2xl">Welcome to the Blogapp!</div>;
 }

@@ -1,20 +1,21 @@
 import { likeBlog } from "@/app/actions/blogs";
 import { findBlogById } from "@/app/services/blogs";
+import BlogPage from "../BlogPage";
 
 const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const blog = findBlogById(Number(id));
+  const blog = await findBlogById(Number(id));
 
   return (
     <div>
-      <h2>{blog.title}</h2>
-      <p> - {blog.author}</p>
-      <p>{blog.url}</p>
-      <p>Likes: {blog.likes}</p>
-      <form action={likeBlog}>
-        <input type="hidden" name="id" value={blog.id} />
-        <button type="submit">+ add like</button>
-      </form>
+      <BlogPage blogs={[blog]}>
+        <form action={likeBlog}>
+          <input type="hidden" name="id" value={blog.id} />
+          <button type="submit" className="btn">
+            + add like
+          </button>
+        </form>
+      </BlogPage>
     </div>
   );
 };

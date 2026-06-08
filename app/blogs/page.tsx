@@ -1,38 +1,32 @@
-import Link from "next/link";
 import { getBlogs, filterBlogs } from "../services/blogs";
 import { searchBlogs } from "../actions/blogs";
+import BlogPage from "./BlogPage";
 
 const Blogs = async ({
   searchParams,
 }: {
   searchParams: Promise<{ filter: string }>;
 }) => {
-  const allBlogs = getBlogs();
+  const allBlogs = await getBlogs();
   const { filter } = await searchParams;
-  const filteredBlogs = filterBlogs(String(filter));
+  const filteredBlogs = await filterBlogs(String(filter));
   const blogs = filter ? filteredBlogs : allBlogs;
 
   return (
-    <div>
-      <h2>Blogs</h2>
-      <form action={searchBlogs}>
-        <input placeholder="Search" name="filter" defaultValue={filter || ""} />
-        <button type="submit">Submit</button>
+    <div className="space-y-2">
+      <h2 className="text-2xl">Blogs</h2>
+      <form action={searchBlogs} className="space-x-2">
+        <input
+          placeholder="Search"
+          name="filter"
+          defaultValue={filter || ""}
+          className="inp"
+        />
+        <button type="submit" className="btn">
+          Submit
+        </button>
       </form>
-      <ul>
-        {blogs
-          .sort((a, b) => b.likes - a.likes)
-          .map((b) => (
-            <li key={b.id}>
-              <Link href={`/blogs/${b.id}`}>
-                <h2>{b.title}</h2>
-              </Link>
-              <p> - {b.author}</p>
-              <a href={b.url}>link to the blog</a>
-              <p>Likes: {b.likes}</p>
-            </li>
-          ))}
-      </ul>
+      <BlogPage blogs={blogs} />
     </div>
   );
 };
