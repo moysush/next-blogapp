@@ -8,6 +8,34 @@
       "when": 1780944227773,
       "tag": "0000_lovely_giant_girl",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1781090958777,
+      "tag": "0001_ordinary_angel",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781091592867,
+      "tag": "0002_reflective_swordsman",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1781092749013,
+      "tag": "0003_closed_wildside",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1781106821692,
+      "tag": "0004_pink_lethal_legion",
+      "breakpoints": true
     }
   ]
 }

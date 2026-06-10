@@ -11,7 +11,7 @@ export const getBlogs = async () => {
 };
 
 export const addBlog = async (blog: BlogInput) => {
-  return await db.insert(blogs).values({ ...blog, likes: 0 });
+  return await db.insert(blogs).values({ ...blog, likes: 0, userId: 2 });
 };
 
 export const findBlogById = async (id: number) => {

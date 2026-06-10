@@ -30,9 +30,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <nav className="mb-4">
-          <Link href="/">Home | </Link>
-          <Link href="/blogs">Blogs | </Link>
+          <Link href="/">Home</Link>
+          {" | "}
+          <Link href="/blogs">Blogs</Link>
+          {" | "}
           <Link href="/blogs/new">Create Blog</Link>
+          {" | "}
+          <Link href="/users">Users</Link>
         </nav>
         {children}
       </body>
