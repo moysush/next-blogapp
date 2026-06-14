@@ -20,13 +20,18 @@ export default function NavBar() {
             <Link href="/blogs/new">Create Blog</Link>
             {" | "}
             <em className="font-bold">{session.user?.name} logged in</em>{" "}
-            <button className="btn" onClick={() => redirect("/api/auth/signout")}>
+            <button
+              className="btn"
+              onClick={() => redirect("/api/auth/signout")}
+            >
               Logout
             </button>
           </>
         ) : (
           <>
-            <Link href="/api/auth/signin">Login</Link>
+            <Link href="/login">Login</Link>
+            {" | "}
+            <Link href="/register">Register</Link>
           </>
         )}
       </nav>

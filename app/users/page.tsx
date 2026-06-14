@@ -13,6 +13,7 @@ const Users = async () => {
             className="url text-2xl"
           >
             {user.name}
+            <br />
           </Link>
         ))}
       </ul>
