@@ -16,6 +16,7 @@ export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: text().unique().notNull(),
   name: text().notNull(),
+  passwordHash: text().notNull().default(""),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({

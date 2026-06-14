@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+import NavBar from "./ components/NavBar";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,16 +30,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased m-4`}
     >
       <body className="min-h-full flex flex-col">
-        <nav className="mb-4">
-          <Link href="/">Home</Link>
-          {" | "}
-          <Link href="/blogs">Blogs</Link>
-          {" | "}
-          <Link href="/blogs/new">Create Blog</Link>
-          {" | "}
-          <Link href="/users">Users</Link>
-        </nav>
-        {children}
+        <SessionProvider>
+          <NavBar />
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );
