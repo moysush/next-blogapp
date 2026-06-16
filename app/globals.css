@@ -2,16 +2,22 @@
 
 @layer components {
     .btn {
-        @apply py-1 px-4 my-1 bg-gray-600 rounded-md cursor-pointer;
+        @apply py-1 px-4 my-1 bg-cyan-800 rounded-md cursor-pointer;
     }
     .blog {
-        @apply p-4 border border-gray-500 rounded-md max-w-lg;
+        @apply p-4 border border-amber-600 rounded-md;
     }
     .inp {
         @apply p-1 my-1 border border-gray-500 rounded-md;
     }
     .url {
-        @apply underline text-purple-600;
+        @apply text-cyan-600;
+    }
+    .user {
+        @apply p-4 border border-amber-600 rounded-md;
+    }
+    .form {
+        @apply border border-amber-600 rounded p-4 flex flex-col justify-center max-w-sm mx-auto;
     }
 }
 

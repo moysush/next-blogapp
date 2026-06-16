@@ -23,14 +23,26 @@ export default function LoginPage() {
 
   return (
     <>
-      <h2>Login</h2>
       {error && <p className="text-red-600">{error}</p>}
-      <form action={handleSubmit}>
-        <input type="username" name="username" placeholder="username" />
+      <form action={handleSubmit} className="form">
+        <h2 className="text-2xl mb-2">Login</h2>
+        <input
+          type="username"
+          name="username"
+          placeholder="username"
+          className="inp"
+        />
         <br />
-        <input type="password" name="password" placeholder="password" />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          className="inp"
+        />
         <br />
-        <button type="submit">Login</button>
+        <button type="submit" className="btn">
+          Login
+        </button>
       </form>
     </>
   );

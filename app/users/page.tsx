@@ -5,12 +5,13 @@ const Users = async () => {
   const users = await getUsers();
   return (
     <div>
-      <ul>
+      <h2 className="text-2xl mb-4">Users</h2>
+      <ul className="user">
         {users.map((user) => (
           <Link
             key={user.id}
             href={`/users/${user.username}`}
-            className="url text-2xl"
+            className="text-2xl list-item list-disc url"
           >
             {user.name}
             <br />

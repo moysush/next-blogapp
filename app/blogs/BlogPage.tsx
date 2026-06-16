@@ -16,7 +16,7 @@ const BlogPage = ({
         .map((b) => (
           <li key={b.id} className="blog">
             <Link href={`/blogs/${b.id}`}>
-              <h2 className="text-lg">{b.title}</h2>
+              <h2 className="text-lg url">{b.title}</h2>
             </Link>
             <p> - {b.author}</p>
             <a href={b.url}>{b.url}</a>

@@ -16,7 +16,7 @@ const UserPage = async ({
       <p>{user.username}</p>
       <ul>
         {user.blogs.map((b) => (
-          <li className="blog mb-2" key={b.id}>
+          <li className="blog my-2" key={b.id}>
             <Link href={`/blogs/${b.id}`} className="url">
               {b.title}{" "}
             </Link>

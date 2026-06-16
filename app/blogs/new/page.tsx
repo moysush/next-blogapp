@@ -22,41 +22,34 @@ const NewBlog = () => {
   }, [state, showNotification, router]);
 
   return (
-    <div>
-      <form action={formAction}>
-        <div>
-          <input
-            type="text"
-            name="title"
-            placeholder="title"
-            className="inp"
-            defaultValue={state.values?.title}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="author"
-            placeholder="author"
-            className="inp"
-            defaultValue={state.values?.author}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="url"
-            placeholder="url"
-            className="inp"
-            defaultValue={state.values?.url}
-          />
-        </div>
-        {state && <p className="text-red-600">{state.error}</p>}
-        <button type="submit" className="btn">
-          Submit
-        </button>
-      </form>
-    </div>
+    <form action={formAction} className="form">
+      <h2 className="text-2xl mb-2">Create Blog</h2>
+      <input
+        type="text"
+        name="title"
+        placeholder="title"
+        className="inp"
+        defaultValue={state.values?.title}
+      />
+      <input
+        type="text"
+        name="author"
+        placeholder="author"
+        className="inp"
+        defaultValue={state.values?.author}
+      />
+      <input
+        type="text"
+        name="url"
+        placeholder="url"
+        className="inp"
+        defaultValue={state.values?.url}
+      />
+      {state && <p className="text-red-600">{state.error}</p>}
+      <button type="submit" className="btn">
+        Submit
+      </button>
+    </form>
   );
 };
 

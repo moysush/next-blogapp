@@ -28,12 +28,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased m-4`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col">
+      <body>
         <SessionProvider>
           <NavBar />
-          <NotificationContextProvider>{children}</NotificationContextProvider>
+          <NotificationContextProvider>
+            <div className="max-w-2xl mx-auto">{children}</div>
+          </NotificationContextProvider>
         </SessionProvider>
       </body>
     </html>
