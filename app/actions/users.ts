@@ -6,9 +6,11 @@ import { db } from "../db";
 import { users } from "../db/schema";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
+import { addToken } from "../services/users";
+import { getCurrentUser } from "../services/session";
 
 export const registerUser = async (
-  prevState: { error: string, values: object },
+  prevState: { error: string; values: object },
   formData: FormData,
 ) => {
   const rawPassword = String(formData.get("password"));
@@ -61,4 +63,14 @@ export const registerUser = async (
 
   revalidatePath("/login");
   redirect("/login");
+};
+
+export const createToken = async () => {
+  const user = await getCurrentUser();
+  const token = await addToken();
+  const id = Number(user?.id);
+
+  await db.update(users).set({ token: token }).where(eq(users.id, id));
+
+  revalidatePath("/me");
 };

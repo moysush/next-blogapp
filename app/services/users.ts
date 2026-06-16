@@ -15,3 +15,7 @@ export const getUserWithBlogs = async (username: string) => {
   });
   return user;
 };
+
+export const addToken = async () => {
+  return crypto.randomUUID();
+};

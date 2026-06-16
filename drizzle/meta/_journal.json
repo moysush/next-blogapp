@@ -43,6 +43,13 @@
       "when": 1781420074960,
       "tag": "0005_magical_living_tribunal",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1781617548274,
+      "tag": "0006_daily_shockwave",
+      "breakpoints": true
     }
   ]
 }
