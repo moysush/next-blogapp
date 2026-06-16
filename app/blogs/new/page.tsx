@@ -1,13 +1,26 @@
 "use client";
 
+import { useNotification } from "@/app/ components/NotificationContext";
 import { createBlog } from "@/app/actions/blogs";
-import { useActionState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
 
 const NewBlog = () => {
+  const { showNotification } = useNotification();
+  const router = useRouter();
   const [state, formAction] = useActionState(createBlog, {
     error: "",
     values: { title: "", author: "", url: "" },
+    success: false,
   });
+
+  useEffect(() => {
+    if (state.success) {
+      showNotification("Blog created", "success");
+      router.push("/blogs");
+    }
+  }, [state, showNotification, router]);
+
   return (
     <div>
       <form action={formAction}>
@@ -17,7 +30,7 @@ const NewBlog = () => {
             name="title"
             placeholder="title"
             className="inp"
-            defaultValue={state.values.title}
+            defaultValue={state.values?.title}
           />
         </div>
         <div>
@@ -26,7 +39,7 @@ const NewBlog = () => {
             name="author"
             placeholder="author"
             className="inp"
-            defaultValue={state.values.author}
+            defaultValue={state.values?.author}
           />
         </div>
         <div>
@@ -35,7 +48,7 @@ const NewBlog = () => {
             name="url"
             placeholder="url"
             className="inp"
-            defaultValue={state.values.url}
+            defaultValue={state.values?.url}
           />
         </div>
         {state && <p className="text-red-600">{state.error}</p>}

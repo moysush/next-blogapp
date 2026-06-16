@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "./ components/NavBar";
 import { SessionProvider } from "next-auth/react";
+import { NotificationContextProvider } from "./ components/NotificationContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +33,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <SessionProvider>
           <NavBar />
-          {children}
+          <NotificationContextProvider>{children}</NotificationContextProvider>
         </SessionProvider>
       </body>
     </html>

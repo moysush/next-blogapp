@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 
 export const createBlog = async (
-  prevState: { error: string; values: object },
+  prevState: { error: string; values?: object; success: boolean },
   formData: FormData,
 ) => {
   const session = await auth();
@@ -26,25 +26,28 @@ export const createBlog = async (
     return {
       error: "Title must be of at least 5 characters long",
       values,
+      success: false,
     };
   }
   if (blog.author.length < 5) {
     return {
       error: "Author must be of at least 5 characters long",
       values,
+      success: false,
     };
   }
   if (blog.url.length < 5) {
     return {
       error: "URL must be of at least 5 characters long",
       values,
+      success: false,
     };
   }
 
   await addBlog(blog);
 
   revalidatePath("/blogs");
-  redirect("/blogs");
+  return { error: "", success: true };
 };
 
 export const likeBlog = async (formData: FormData) => {
