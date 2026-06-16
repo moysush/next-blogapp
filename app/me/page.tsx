@@ -6,22 +6,28 @@ const Me = async () => {
   const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/login")
+    redirect("/login");
   }
 
   return (
-    <div>
-      <h2>My Profile</h2>
-      <p>Name: {user.name}</p>
-      <p>Username: {user.username}</p>
+    <div className="user space-y-2">
+      <h2 className="text-2xl">My Profile</h2>
+      <p>
+        <strong>Name:</strong> {user.name}
+      </p>
+      <p>
+        <strong>Username:</strong> {user.username}
+      </p>
       <hr />
-      <h4>API Token</h4>
-      <div>
-        <p>Current Token:</p>
-        <p>{user.token}</p>
-      </div>
       <form action={createToken}>
-        <button type="submit">Generate New Token</button>
+        <h4 className="text-xl">API Token</h4>
+        <div>
+          <p>Current Token:</p>
+          <p>{user.token}</p>
+        </div>
+        <button type="submit" className="btn">
+          Generate New Token
+        </button>
       </form>
     </div>
   );

@@ -16,6 +16,27 @@ export const getUserWithBlogs = async (username: string) => {
   return user;
 };
 
+export const getUserWithBlogsByToken = async (token: string) => {
+  const user = await db.query.users.findFirst({
+    columns: {
+      id: true,
+      username: true,
+      name: true,
+    },
+    where: eq(users.token, token),
+    with: {
+      blogs: {
+        columns: {
+          author: true,
+          title: true,
+          url: true,
+        },
+      },
+    },
+  });
+  return user;
+};
+
 export const addToken = async () => {
   return crypto.randomUUID();
 };
