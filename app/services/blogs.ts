@@ -1,7 +1,7 @@
 import { Blog } from "@/types";
 import { notFound } from "next/navigation";
 import { db } from "../db";
-import { blogs } from "../db/schema";
+import { blogs, readingList } from "../db/schema";
 import { eq, ilike } from "drizzle-orm";
 import { getCurrentUser } from "./session";
 
@@ -18,7 +18,15 @@ export const addBlog = async (blog: BlogInput) => {
     throw new Error("Not logged in");
   }
 
-  return await db.insert(blogs).values({ ...blog, likes: 0, userId: user.id });
+  const addedBlog = await db
+    .insert(blogs)
+    .values({ ...blog, likes: 0, userId: user.id })
+    .returning(); // returns the data
+
+  // creating a readingList for the new blog
+  await db
+    .insert(readingList)
+    .values({ userId: user.id, blogId: addedBlog[0].id });
 };
 
 export const findBlogById = async (id: number) => {

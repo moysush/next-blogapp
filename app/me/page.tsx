@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { createToken } from "../actions/users";
 import { getCurrentUser } from "../services/session";
+import { getReadingList } from "../services/readingList";
+import Link from "next/link";
 
 const Me = async () => {
   const user = await getCurrentUser();
@@ -8,6 +10,8 @@ const Me = async () => {
   if (!user) {
     redirect("/login");
   }
+
+  const readingList = await getReadingList(user?.id);
 
   return (
     <div className="user space-y-2">
@@ -29,6 +33,20 @@ const Me = async () => {
           Generate New Token
         </button>
       </form>
+      <div>
+        <h2 className="text-xl">Reading List</h2>
+        <ul className="">
+          {readingList.map((r) => (
+            <Link
+              key={r.id}
+              href={`/blogs/${r.blogId}`}
+              className="url list-inside list-decimal list-item"
+            >
+              {r.blog.title} - {r.blog.author}
+            </Link>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

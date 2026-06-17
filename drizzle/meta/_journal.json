@@ -50,6 +50,13 @@
       "when": 1781617548274,
       "tag": "0006_daily_shockwave",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1781688537152,
+      "tag": "0007_modern_excalibur",
+      "breakpoints": true
     }
   ]
 }

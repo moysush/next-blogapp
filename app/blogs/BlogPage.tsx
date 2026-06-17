@@ -16,10 +16,17 @@ const BlogPage = ({
         .map((b) => (
           <li key={b.id} className="blog">
             <Link href={`/blogs/${b.id}`}>
-              <h2 className="text-lg url">{b.title}</h2>
+              <h2 className="text-2xl url">{b.title}</h2>
             </Link>
             <p> - {b.author}</p>
-            <a href={b.url}>{b.url}</a>
+            <a
+              href={b.url.includes("https://") ? b.url : `https://${b.url}`}
+              className="url"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {b.url}
+            </a>
             <p>Likes: {b.likes}</p>
             {children}
           </li>
