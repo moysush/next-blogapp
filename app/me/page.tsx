@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { createToken } from "../actions/users";
 import { getCurrentUser } from "../services/session";
 import { getReadingList } from "../services/readingList";
-import Link from "next/link";
+import ReadingListPage from "./ReadingListPage";
 
 const Me = async () => {
   const user = await getCurrentUser();
@@ -12,10 +12,12 @@ const Me = async () => {
   }
 
   const readingList = await getReadingList(user?.id);
+  const read = readingList.filter((r) => r.read);
+  const unRead = readingList.filter((r) => !r.read);
 
   return (
     <div className="user space-y-2">
-      <h2 className="text-2xl">My Profile</h2>
+      <h2 className="text-2xl font-black">My Profile</h2>
       <p>
         <strong>Name:</strong> {user.name}
       </p>
@@ -24,7 +26,7 @@ const Me = async () => {
       </p>
       <hr />
       <form action={createToken}>
-        <h4 className="text-xl">API Token</h4>
+        <h4 className="text-xl font-bold">API Token</h4>
         <div>
           <p>Current Token:</p>
           <p>{user.token}</p>
@@ -33,19 +35,11 @@ const Me = async () => {
           Generate New Token
         </button>
       </form>
+      <hr />
       <div>
-        <h2 className="text-xl">Reading List</h2>
-        <ul className="">
-          {readingList.map((r) => (
-            <Link
-              key={r.id}
-              href={`/blogs/${r.blogId}`}
-              className="url list-inside list-decimal list-item"
-            >
-              {r.blog.title} - {r.blog.author}
-            </Link>
-          ))}
-        </ul>
+        <h2 className="text-xl font-bold">Reading List</h2>
+        <ReadingListPage readingList={unRead} title="Unread" />
+        <ReadingListPage readingList={read} title="Read" />
       </div>
     </div>
   );
