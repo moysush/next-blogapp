@@ -27,7 +27,15 @@ const ReadingListPage = ({
 }) => {
   return (
     <div>
-      <ul>
+      <ul
+        data-testid={
+          title === "Read"
+            ? ""
+            : readingList.length === 0
+              ? "no-unread-blogs"
+              : "unread-section"
+        }
+      >
         <h4 className="font-bold">
           {title} ({readingList.length})
         </h4>
@@ -46,7 +54,11 @@ const ReadingListPage = ({
                 name="readingListRead"
                 value={r.read ? "true" : "false"}
               />
-              <button type="submit" className="btn ">
+              <button
+                type="submit"
+                className="btn"
+                data-testid={`mark-read-${r.id}`}
+              >
                 {title === "Read" ? "Mark as Unread" : "Mark as Read"}
               </button>
             </form>

@@ -27,7 +27,7 @@ export const NotificationContextProvider = ({
   const showNotification = (msg: string, notifType: NotificationType) => {
     setMessage(msg);
     setType(notifType);
-    setTimeout(() => setMessage(""), 3000);
+    setTimeout(() => setMessage(""), 5000);
   };
 
   return (
@@ -35,6 +35,7 @@ export const NotificationContextProvider = ({
       {message && (
         <p
           className={`bg-${type === "success" ? "green" : type === "error" ? "red" : "blue"}-700 p-2 rounded`}
+          data-testid="notification"
         >
           {message}
         </p>

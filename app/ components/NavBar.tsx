@@ -9,13 +9,13 @@ export default function NavBar() {
     <nav className="flex items-center justify-between bg-amber-700 p-2 rounded mb-4">
       <div className="flex gap-4 items-center">
         <Link href="/" className="hover:text-cyan-300">
-          Home
+          home
         </Link>
         <Link href="/blogs" className="hover:text-cyan-300">
-          Blogs
+          blogs
         </Link>
         <Link href="/users" className="hover:text-cyan-300">
-          Users
+          users
         </Link>
       </div>
       <div className="flex gap-4 items-center">
@@ -25,20 +25,20 @@ export default function NavBar() {
               Create Blog
             </Link>
             <Link href="/me" className="hover:text-cyan-300">
-              Me
+              me
             </Link>
             <em className="font-bold">{session.user?.name} logged in</em>{" "}
-            <button className="btn" onClick={() => signOut()}>
-              Logout
+            <button className="btn" onClick={() => signOut()} data-testid="logout-button">
+              logout
             </button>
           </>
         ) : (
           <>
             <Link href="/login" className="hover:text-cyan-300">
-              Login
+              login
             </Link>
             <Link href="/register" className="hover:text-cyan-300">
-              Register
+              register
             </Link>
           </>
         )}

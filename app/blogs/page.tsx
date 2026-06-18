@@ -21,8 +21,9 @@ const Blogs = async ({
           name="filter"
           defaultValue={filter || ""}
           className="inp"
+          data-testid="filter-input"
         />
-        <button type="submit" className="btn">
+        <button type="submit" className="btn" data-testid="search-button">
           Submit
         </button>
       </form>

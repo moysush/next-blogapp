@@ -10,7 +10,7 @@ import { addToken } from "../services/users";
 import { getCurrentUser } from "../services/session";
 
 export const registerUser = async (
-  prevState: { error: string; values: object },
+  prevState: { error: string; errorTitle: string; values: object },
   formData: FormData,
 ) => {
   const rawPassword = String(formData.get("password"));
@@ -34,18 +34,21 @@ export const registerUser = async (
   if (user.username.length < 4) {
     return {
       error: "Username must be at least 4 characters long",
+      errorTitle: "username-error",
       values,
     };
   }
   if (rawPassword.length < 4) {
     return {
       error: "Password must be at least 4 characters long",
+      errorTitle: "password-error",
       values,
     };
   }
   if (confirmPassword !== rawPassword) {
     return {
       error: "Passwords must match",
+      errorTitle: "passwordConfirm-error",
       values,
     };
   }
@@ -55,6 +58,7 @@ export const registerUser = async (
   if (userExist) {
     return {
       error: "Username already exists",
+      errorTitle: "user-exist-error",
       values,
     };
   }

@@ -3,11 +3,13 @@ import { findBlogById } from "@/app/services/blogs";
 import BlogPage from "../BlogPage";
 import { getReadingListByBlogId } from "@/app/services/readingList";
 import { createReadingList } from "@/app/actions/readingList";
+import { getCurrentUser } from "@/app/services/session";
 
 const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const blog = await findBlogById(Number(id));
-  const blogInReadingList = await getReadingListByBlogId(blog.id);
+  const currentUser = await getCurrentUser();
+  const blogInReadingList = await getReadingListByBlogId(blog.id, Number(currentUser?.id));
 
   return (
     <div>
@@ -22,8 +24,12 @@ const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
           {!blogInReadingList && (
             <form action={createReadingList}>
               <input type="hidden" name="blogId" value={blog.id} />
-              <input type="hidden" name="userId" value={blog.userId} />
-              <button type="submit" className="btn">
+              <input type="hidden" name="userId" value={currentUser?.id} />
+              <button
+                type="submit"
+                className="btn"
+                data-testid="add-to-reading-list-button"
+              >
                 Add to reading list
               </button>
             </form>

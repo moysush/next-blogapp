@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { db } from "../db";
 import { readingList } from "../db/schema";
 
@@ -11,9 +11,12 @@ export const getReadingList = async (userId: number) => {
   });
 };
 
-export const getReadingListByBlogId = async (blogId: number) => {
+export const getReadingListByBlogId = async (
+  blogId: number,
+  userId: number,
+) => {
   return await db.query.readingList.findFirst({
-    where: eq(readingList.blogId, blogId),
+    where: and(eq(readingList.blogId, blogId), eq(readingList.userId, userId)),
     with: {
       blog: true,
     },

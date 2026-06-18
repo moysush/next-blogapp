@@ -24,20 +24,27 @@ const NewBlog = () => {
   return (
     <form action={formAction} className="form">
       <h2 className="text-2xl mb-2">Create Blog</h2>
-      <input
-        type="text"
-        name="title"
-        placeholder="title"
-        className="inp"
-        defaultValue={state.values?.title}
-      />
-      <input
-        type="text"
-        name="author"
-        placeholder="author"
-        className="inp"
-        defaultValue={state.values?.author}
-      />
+      <label>
+        Title
+        <input
+          type="text"
+          name="title"
+          placeholder="title"
+          className="inp"
+          defaultValue={state.values?.title}
+        />
+      </label>
+      <label>
+        Author
+        <input
+          type="text"
+          name="author"
+          placeholder="author"
+          className="inp"
+          defaultValue={state.values?.author}
+        />
+      </label>
+      <label>URL
       <input
         type="text"
         name="url"
@@ -45,9 +52,10 @@ const NewBlog = () => {
         className="inp"
         defaultValue={state.values?.url}
       />
+      </label>
       {state && <p className="text-red-600">{state.error}</p>}
-      <button type="submit" className="btn">
-        Submit
+      <button type="submit" className="btn" data-testid="create-blog-button">
+        Create
       </button>
     </form>
   );

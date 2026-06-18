@@ -11,12 +11,12 @@ export async function DELETE() {
   }
 
   try {
-    await db.delete(blogs);
     await db.delete(readingList);
+    await db.delete(blogs);
     await db.delete(users);
     return NextResponse.json({ messages: "All datas were deleted" });
   } catch (error) {
     console.error(error);
-    return NextResponse.json(error);
+    return NextResponse.json(error, {status: 500});
   }
 }

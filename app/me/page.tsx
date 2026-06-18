@@ -17,29 +17,45 @@ const Me = async () => {
 
   return (
     <div className="user space-y-2">
-      <h2 className="text-2xl font-black">My Profile</h2>
-      <p>
-        <strong>Name:</strong> {user.name}
-      </p>
-      <p>
-        <strong>Username:</strong> {user.username}
-      </p>
+      <div data-testid="user-profile">
+        <h2 className="text-2xl font-black">My Profile</h2>
+        <p data-testid="user-name">
+          <strong>Name:</strong> {user.name}
+        </p>
+        <p data-testid="user-username">
+          <strong>Username:</strong> {user.username}
+        </p>
+      </div>
       <hr />
-      <form action={createToken}>
+      <form action={createToken} data-testid="api-token-section">
         <h4 className="text-xl font-bold">API Token</h4>
-        <div>
+        <div data-testid="token-display">
           <p>Current Token:</p>
-          <p>{user.token}</p>
+          {user.token ? (
+            <p data-testid="api-token">{user.token}</p>
+          ) : (
+            <p data-testid="no-token-message">No token exist...</p>
+          )}
         </div>
-        <button type="submit" className="btn">
+        <button
+          type="submit"
+          className="btn"
+          data-testid="generate-token-button"
+        >
           Generate New Token
         </button>
       </form>
       <hr />
-      <div>
+      <div data-testid="reading-list-section">
         <h2 className="text-xl font-bold">Reading List</h2>
-        <ReadingListPage readingList={unRead} title="Unread" />
-        <ReadingListPage readingList={read} title="Read" />
+        {readingList.length === 0 ? (
+          <p data-testid="empty-reading-list">There is no blog yet...</p>
+        ) : (
+          <>
+            <ReadingListPage readingList={unRead} title="Unread" />
+            <ReadingListPage readingList={read} title="Read" />
+          </>
+        )}
       </div>
     </div>
   );
