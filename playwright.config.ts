@@ -4,6 +4,8 @@ import * as dotenv from "dotenv";
 const envFile = process.env.CI ? ".env.test" : ".env.local";
 dotenv.config({ path: envFile });
 
+process.env.NEXTAUTH_URL = "http://localhost:3000";
+
 export default defineConfig({
   testDir: "./tests",
   use: {
