@@ -1,4 +1,8 @@
-import { defineConfig } from "@playwright/test"
+import { defineConfig } from "@playwright/test";
+import * as dotenv from "dotenv";
+
+const envFile = process.env.CI ? ".env.test" : ".env.local";
+dotenv.config({ path: envFile });
 
 export default defineConfig({
   testDir: "./tests",
@@ -10,4 +14,4 @@ export default defineConfig({
     url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
   },
-})
+});
