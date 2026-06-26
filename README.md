@@ -16,7 +16,7 @@ A modern, server-rendered blogging platform built to deliver fast initial load t
    ```bash
    bun install
    ```
-2. Configure your environment variables (refer to .env.example)
+2. Configure your environment variables (refer to `.env.example`)
 3. Start the development server:
    ```bash
    bun dev
