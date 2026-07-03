@@ -52,7 +52,7 @@ export default function RegisterPage() {
           <input
             type="password"
             name="passwordConfirm"
-            placeholder="Confirm Password"
+            placeholder="confirm Password"
             // minLength={4}
             defaultValue={state.values.passwordConfirm}
             className="inp"

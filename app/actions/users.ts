@@ -66,6 +66,7 @@ export const registerUser = async (
   await db.insert(users).values(user);
 
   revalidatePath("/login");
+  revalidatePath("/users")
   redirect("/login");
 };
 
